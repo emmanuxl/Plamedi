@@ -1,0 +1,1171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>I Wasn't Planning on Missing You</title>
+    <meta
+      name="description"
+      content="A short, unnecessary website. Because apparently two months was enough."
+    />
+    <meta property="og:title" content="I wasn't planning on missing you." />
+    <meta
+      property="og:description"
+      content="But apparently, you had other plans."
+    />
+    <meta property="og:type" content="website" />
+    <!-- If you host this online, uncomment and set a real image for a proper link preview:
+<meta property="og:image" content="https://your-hosted-url.com/preview.jpg"> -->
+    <meta name="twitter:card" content="summary" />
+
+    <!-- ============================================================
+     EDIT ME — quick config for text you'll want to swap out
+     Search for "CONFIG" below in the <script> to change:
+     - the inside joke / thing she owes you
+     - the memory captions in Section 3
+     - photo placeholders (swap the .memory-photo divs for <img>)
+     ============================================================ -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: light;
+        --cream: #f3ede2;
+        --cream-2: #faf6ef;
+        --ink: #211b16;
+        --ink-soft: #4a423b;
+        --dark: #241e1a;
+        --dark-2: #2e2620;
+        --burgundy: #7e3232;
+        --burgundy-light: #a85555;
+        --gold: #b69465;
+        --line: rgba(33, 27, 22, 0.14);
+        --line-dark: rgba(244, 239, 230, 0.16);
+        --serif: "Fraunces", serif;
+        --sans: "Inter", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+        background: #f3ede2;
+        scrollbar-color: var(--gold) var(--cream);
+        scrollbar-width: thin;
+      }
+
+      ::-webkit-scrollbar {
+        width: 9px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--cream);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--gold);
+        border-radius: 5px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--burgundy);
+      }
+
+      /* The "thread" motif from the Exhibit A timeline, extended across
+     the whole page — a thin line that fills as she scrolls through
+     the story, top to bottom. */
+      #scrollProgress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2px;
+        width: 0%;
+        background: var(--burgundy);
+        z-index: 1000;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--burgundy);
+        outline-offset: 3px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        * {
+          animation-duration: 0.001ms !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+
+      body {
+        background: var(--cream);
+        color: var(--ink);
+        font-family: var(--sans);
+        line-height: 1.5;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      ::selection {
+        background: var(--burgundy);
+        color: var(--cream-2);
+      }
+
+      .wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 0 32px;
+      }
+
+      .eyebrow {
+        font-family: var(--sans);
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--burgundy);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 22px;
+        height: 1px;
+        background: var(--burgundy);
+        display: inline-block;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      /* scroll reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.9s cubic-bezier(0.16, 0.84, 0.44, 1),
+          transform 0.9s cubic-bezier(0.16, 0.84, 0.44, 1);
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal.d1 {
+        transition-delay: 0.08s;
+      }
+      .reveal.d2 {
+        transition-delay: 0.16s;
+      }
+      .reveal.d3 {
+        transition-delay: 0.24s;
+      }
+      .reveal.d4 {
+        transition-delay: 0.32s;
+      }
+
+      /* ================= HERO ================= */
+      .hero {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        padding: 140px 32px 100px;
+      }
+      .hero-inner {
+        max-width: 980px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .hero-mark {
+        font-family: var(--sans);
+        font-size: 12px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        margin-bottom: 34px;
+      }
+      .hero h1 {
+        font-family: var(--serif);
+        font-weight: 500;
+        font-size: clamp(2.2rem, 6.4vw, 5.1rem);
+        line-height: 1.04;
+        letter-spacing: -0.01em;
+        max-width: 15ch;
+      }
+      .hero h1 .accent {
+        font-style: italic;
+        font-weight: 400;
+        color: var(--burgundy);
+      }
+      .hero-sub {
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+        color: var(--ink-soft);
+        margin-top: 30px;
+        max-width: 30ch;
+      }
+      .hero-aside {
+        margin-top: 22px;
+        font-size: 14px;
+        color: var(--ink-soft);
+        letter-spacing: 0.01em;
+      }
+      .hero-scroll {
+        position: absolute;
+        bottom: 44px;
+        left: 32px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+      .hero-scroll-line {
+        width: 1px;
+        height: 46px;
+        background: linear-gradient(var(--ink-soft), transparent);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-scroll-line::after {
+        content: "";
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--burgundy);
+        animation: scrollpulse 2.2s ease-in-out infinite;
+      }
+      @keyframes scrollpulse {
+        0% {
+          top: -100%;
+        }
+        60% {
+          top: 100%;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+
+      /* ================= SECTION SHELL ================= */
+      section {
+        padding: 130px 0;
+        position: relative;
+      }
+      .sec-head {
+        margin-bottom: 64px;
+      }
+      .sec-head h2 {
+        font-family: var(--serif);
+        font-weight: 500;
+        font-size: clamp(1.9rem, 4vw, 3rem);
+        margin-top: 18px;
+        letter-spacing: -0.01em;
+      }
+      .sec-lede {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+        color: var(--ink-soft);
+        max-width: 46ch;
+        margin-top: 22px;
+        line-height: 1.5;
+      }
+      .divider {
+        width: 100%;
+        height: 1px;
+        background: var(--line);
+      }
+
+      /* ================= TIMELINE (signature element) ================= */
+      .timeline {
+        position: relative;
+        margin-top: 90px;
+        padding-left: 46px;
+      }
+      .timeline-track {
+        position: absolute;
+        left: 0;
+        top: 6px;
+        bottom: 6px;
+        width: 1px;
+        background: var(--line);
+      }
+      .timeline-fill {
+        position: absolute;
+        left: 0;
+        top: 6px;
+        width: 1px;
+        height: 0%;
+        background: var(--burgundy);
+        transition: height 0.25s linear;
+      }
+      .week {
+        position: relative;
+        padding-bottom: 64px;
+      }
+      .week:last-child {
+        padding-bottom: 0;
+      }
+      .week-dot {
+        position: absolute;
+        left: -46px;
+        top: 4px;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--cream);
+        border: 1px solid var(--ink-soft);
+        transform: translateX(-4px);
+        transition:
+          background 0.5s ease,
+          border-color 0.5s ease,
+          box-shadow 0.5s ease;
+      }
+      .week.in .week-dot {
+        background: var(--burgundy);
+        border-color: var(--burgundy);
+        box-shadow: 0 0 0 5px rgba(126, 50, 50, 0.13);
+      }
+      .week-label {
+        font-family: var(--sans);
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        font-weight: 600;
+      }
+      .week-text {
+        font-family: var(--serif);
+        font-size: clamp(1.25rem, 2.6vw, 1.85rem);
+        margin-top: 8px;
+        font-weight: 400;
+      }
+      .week.final .week-text {
+        font-style: italic;
+        color: var(--burgundy);
+      }
+
+      /* ================= CARDS (section 2) ================= */
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 64px;
+      }
+      .card {
+        background: var(--cream-2);
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        padding: 34px 30px;
+        min-height: 178px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition:
+          border-color 0.4s ease,
+          transform 0.4s ease;
+      }
+      .card.active {
+        border-color: var(--burgundy);
+        transform: translateY(-3px);
+      }
+      .card-num {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 13px;
+        color: var(--gold);
+      }
+      .card-title {
+        font-family: var(--serif);
+        font-weight: 500;
+        font-size: 1.35rem;
+        margin-top: 14px;
+        letter-spacing: -0.01em;
+      }
+      .card-reveal {
+        font-family: var(--sans);
+        font-size: 14.5px;
+        color: var(--ink-soft);
+        margin-top: 14px;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.5s cubic-bezier(0.16, 0.84, 0.44, 1),
+          opacity 0.4s ease 0.05s;
+      }
+      .card.active .card-reveal {
+        max-height: 120px;
+        opacity: 1;
+      }
+      .card-plus {
+        position: absolute;
+        top: 30px;
+        right: 28px;
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 13px;
+        color: var(--ink-soft);
+        transition:
+          transform 0.4s ease,
+          opacity 0.4s ease;
+      }
+      .card.active .card-plus {
+        opacity: 0;
+      }
+      /* Hover behaviour only for devices that truly support hovering (mouse/trackpad).
+     Touch devices rely purely on the tap-to-toggle JS (.active class) above,
+     so a tap always opens AND closes — no sticky :hover state. */
+      @media (hover: hover) and (pointer: fine) {
+        .card:hover {
+          border-color: var(--burgundy);
+          transform: translateY(-3px);
+        }
+        .card:hover .card-reveal {
+          max-height: 120px;
+          opacity: 1;
+        }
+        .card:hover .card-plus {
+          opacity: 0;
+        }
+      }
+
+      /* ================= MEMORIES (section 3) ================= */
+      .memory-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 26px 22px;
+        margin-top: 66px;
+      }
+      .memory {
+        background: var(--cream-2);
+        border: 1px solid var(--line);
+      }
+      .memory:nth-child(2) {
+        transform: translateY(28px);
+      }
+      .memory:nth-child(4) {
+        transform: translateY(-10px);
+      }
+      .memory-photo {
+        position: relative;
+        aspect-ratio: 4/5;
+        background:
+          repeating-linear-gradient(
+            135deg,
+            rgba(33, 27, 22, 0.05) 0 2px,
+            transparent 2px 14px
+          ),
+          linear-gradient(160deg, #eae2d3, #ded2bc);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ink-soft);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 20px;
+        overflow: hidden;
+      }
+      /* This automatically fills with a real photo the moment a matching
+     image file sits next to this HTML file (see CONFIG.memories → photo).
+     If the file isn't found yet, it silently falls back to the
+     placeholder label below — nothing breaks either way. */
+      .memory-photo img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.6s cubic-bezier(0.16, 0.84, 0.44, 1);
+      }
+      .memory:hover .memory-photo img {
+        transform: scale(1.045);
+      }
+      .memory-body {
+        padding: 20px 22px 24px;
+      }
+      .memory-num {
+        font-family: var(--serif);
+        font-style: italic;
+        color: var(--burgundy);
+        font-size: 13px;
+      }
+      .memory-title {
+        font-family: var(--serif);
+        font-weight: 500;
+        font-size: 1.15rem;
+        margin-top: 6px;
+        letter-spacing: -0.01em;
+      }
+      .memory-text {
+        font-family: var(--sans);
+        font-size: 14px;
+        color: var(--ink-soft);
+        margin-top: 10px;
+        line-height: 1.55;
+        white-space: pre-line;
+      }
+
+      /* ================= EMOTIONAL CENTRE (section 4) ================= */
+      .centre {
+        background: var(--cream-2);
+        color: var(--ink);
+        padding: 150px 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      .centre .wrap {
+        max-width: 720px;
+      }
+      .centre .eyebrow {
+        color: var(--burgundy);
+      }
+      .centre .eyebrow::before {
+        background: var(--burgundy);
+      }
+      .centre-line {
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: clamp(1.3rem, 3vw, 1.9rem);
+        line-height: 1.55;
+        margin-top: 40px;
+        color: var(--ink);
+      }
+      .centre-line em {
+        font-style: italic;
+        color: var(--burgundy);
+      }
+      .centre-line + .centre-line {
+        margin-top: 26px;
+      }
+      .centre-sign {
+        margin-top: 56px;
+        font-family: var(--sans);
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        color: var(--ink-soft);
+      }
+
+      /* ================= WARNINGS (section 5) ================= */
+      .rules {
+        margin-top: 60px;
+      }
+      .rule {
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        align-items: baseline;
+        gap: 20px;
+        padding: 30px 0;
+        border-top: 1px solid var(--line);
+        transition: padding-left 0.35s ease;
+      }
+      .rule:last-child {
+        border-bottom: 1px solid var(--line);
+      }
+      .rule:hover {
+        padding-left: 10px;
+      }
+      .rule-num {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 1.1rem;
+        color: var(--gold);
+      }
+      .rule-text {
+        font-family: var(--serif);
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+      }
+      .rule-text .fill {
+        color: var(--burgundy);
+        font-style: italic;
+      }
+
+      /* ================= FINAL (section 6) ================= */
+      .final {
+        text-align: center;
+        padding: 160px 0 120px;
+      }
+      .final h2 {
+        font-family: var(--serif);
+        font-weight: 500;
+        font-size: clamp(2.3rem, 7vw, 5rem);
+        letter-spacing: -0.01em;
+        line-height: 1.02;
+      }
+      .final h2 em {
+        font-style: italic;
+        color: var(--burgundy);
+      }
+      .final-sub {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: clamp(1.05rem, 2vw, 1.35rem);
+        color: var(--ink-soft);
+        max-width: 34ch;
+        margin: 26px auto 0;
+      }
+      .final-list {
+        margin: 56px auto 0;
+        max-width: 320px;
+        font-family: var(--sans);
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+      }
+      .final-list div {
+        padding: 7px 0;
+      }
+
+      .egg-wrap {
+        margin: 70px auto 0;
+      }
+      .egg-btn {
+        font-family: var(--sans);
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 600;
+        background: transparent;
+        border: 1px solid var(--ink);
+        color: var(--ink);
+        padding: 14px 26px;
+        cursor: pointer;
+        transition:
+          background 0.35s ease,
+          color 0.35s ease,
+          letter-spacing 0.35s ease;
+        animation: eggPulse 2.6s ease-in-out infinite;
+      }
+      .egg-btn.opened {
+        animation: none;
+      }
+      @keyframes eggPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(126, 50, 50, 0);
+        }
+        50% {
+          box-shadow: 0 0 0 7px rgba(126, 50, 50, 0.09);
+        }
+      }
+      .egg-btn:hover {
+        background: var(--ink);
+        color: var(--cream);
+        letter-spacing: 0.14em;
+      }
+      .egg-content {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.7s cubic-bezier(0.16, 0.84, 0.44, 1),
+          opacity 0.5s ease;
+      }
+      .egg-content.open {
+        max-height: 260px;
+        opacity: 1;
+        margin-top: 30px;
+      }
+      .egg-content p {
+        font-family: var(--serif);
+        font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+        line-height: 1.5;
+      }
+      .egg-content p.small {
+        font-family: var(--sans);
+        font-size: 13px;
+        color: var(--ink-soft);
+        margin-top: 18px;
+        font-style: normal;
+        letter-spacing: 0.02em;
+      }
+
+      .final-foot {
+        margin-top: 130px;
+        font-family: var(--sans);
+        font-size: 13px;
+        color: var(--ink-soft);
+        line-height: 1.7;
+      }
+      .final-sign {
+        margin-top: 22px;
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 1.3rem;
+        color: var(--burgundy);
+      }
+
+      footer.strip {
+        height: 90px;
+        background: var(--cream-2);
+        border-top: 1px solid var(--line);
+      }
+
+      /* ================= RESPONSIVE ================= */
+      @media (max-width: 760px) {
+        .wrap {
+          padding: 0 22px;
+        }
+        .hero {
+          padding: 120px 22px 90px;
+        }
+        section {
+          padding: 92px 0;
+        }
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+        .memory-grid {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+        .memory {
+          max-width: 380px;
+          margin: 0 auto;
+        }
+        .memory:nth-child(2),
+        .memory:nth-child(4) {
+          transform: none;
+        }
+        .timeline {
+          padding-left: 34px;
+        }
+        .week-dot {
+          left: -34px;
+        }
+        .centre {
+          padding: 100px 0;
+        }
+        .rule {
+          grid-template-columns: 40px 1fr;
+          gap: 14px;
+        }
+        .final {
+          padding: 110px 0 90px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scrollProgress"></div>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-mark reveal in">A SHORT, UNNECESSARY WEBSITE</div>
+        <h1 class="reveal in">
+          I wasn't planning on <span class="accent">missing you.</span>
+        </h1>
+        <p class="hero-sub reveal in d1">
+          But apparently, you had other plans.
+        </p>
+        <p class="hero-aside reveal in d2">Honestly, a little inconvenient.</p>
+      </div>
+      <div class="hero-scroll">
+        <span>Scroll</span>
+        <span class="hero-scroll-line"></span>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1: TIMELINE ================= -->
+    <section id="twist">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">Exhibit A</span>
+          <h2>The unexpected plot twist</h2>
+          <p class="sec-lede">
+            When you first started here, I obviously had no idea that two months
+            later I'd be making an entire website because you're leaving. Which
+            feels slightly dramatic. But apparently, here we are.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-track"></div>
+          <div class="timeline-fill" id="timelineFill"></div>
+
+          <div class="week reveal">
+            <div class="week-dot"></div>
+            <div class="week-label">Week 1</div>
+            <div class="week-text">New colleague.</div>
+          </div>
+          <div class="week reveal">
+            <div class="week-dot"></div>
+            <div class="week-label">Week 2</div>
+            <div class="week-text">Okay, she's actually interesting.</div>
+          </div>
+          <div class="week reveal">
+            <div class="week-dot"></div>
+            <div class="week-label">Week 3</div>
+            <div class="week-text">Hmm.</div>
+          </div>
+          <div class="week reveal">
+            <div class="week-dot"></div>
+            <div class="week-label">Week 4</div>
+            <div class="week-text">Why do we talk this much?</div>
+          </div>
+          <div class="week final reveal">
+            <div class="week-dot"></div>
+            <div class="week-label">Week 8</div>
+            <div class="week-text">
+              Right. Apparently I'm going to miss her.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap"><div class="divider"></div></div>
+
+    <!-- ================= SECTION 2: CARDS ================= -->
+    <section id="pretend">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">Exhibit B</span>
+          <h2>Things I'll pretend I won't miss</h2>
+          <p class="sec-lede">
+            Tap or hover. I'm not going to make this easy for you.
+          </p>
+        </div>
+
+        <div class="card-grid">
+          <div class="card reveal">
+            <span class="card-plus">+</span>
+            <div class="card-num">01</div>
+            <div class="card-title">The banter</div>
+            <div class="card-reveal">
+              Unfortunately, you've set the standard annoyingly high.
+            </div>
+          </div>
+          <div class="card reveal d1">
+            <span class="card-plus">+</span>
+            <div class="card-num">02</div>
+            <div class="card-title">The random conversations</div>
+            <div class="card-reveal">
+              Somehow we could start talking about absolutely nothing and end up
+              discussing everything.
+            </div>
+          </div>
+          <div class="card reveal d2">
+            <span class="card-plus">+</span>
+            <div class="card-num">03</div>
+            <div class="card-title">The flirting</div>
+            <div class="card-reveal">
+              That we're definitely going to pretend never happened. 👀
+            </div>
+          </div>
+          <div class="card reveal d3">
+            <span class="card-plus">+</span>
+            <div class="card-num">04</div>
+            <div class="card-title">Your presence</div>
+            <div class="card-reveal">This one is annoyingly genuine.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap"><div class="divider"></div></div>
+
+    <!-- ================= SECTION 3: MEMORIES ================= -->
+    <section id="memories">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">Exhibit C</span>
+          <h2>The little things I'll remember</h2>
+          <p class="sec-lede">
+            Out of probably a hundred moments I never wrote down, here are the
+            six that stuck.
+          </p>
+        </div>
+
+        <div class="memory-grid" id="memoryGrid">
+          <!-- populated by CONFIG.memories via script -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4: IN ALL SERIOUSNESS ================= -->
+    <section class="centre" id="serious">
+      <div class="wrap">
+        <span class="eyebrow reveal">Jokes aside</span>
+        <p class="centre-line reveal d1">
+          I didn't expect to get this close to you when you started here.
+        </p>
+        <p class="centre-line reveal d2">
+          Two months isn't a particularly long time, but somehow you've managed
+          to leave a <em>bigger impression</em> than people I've known for much
+          longer.
+        </p>
+        <p class="centre-line reveal d3">I'm genuinely really glad we met.</p>
+        <p class="centre-line reveal d3">
+          I hope this internship is everything you want it to be. I hope you
+          learn loads, meet amazing people, have an incredible time, and have
+          some fun stories to share.
+        </p>
+        <p class="centre-line reveal d4">
+          And if this ends up being goodbye rather than see you later, I'm still
+          really glad I got to know you.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5: BEFORE YOU GO ================= -->
+    <section id="warnings">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">Exhibit D: Terms and Conditions</span>
+          <h2>Before you go...</h2>
+        </div>
+        <div class="rules" id="rulesList">
+          <!-- populated by CONFIG.rules via script -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6: FINAL MESSAGE ================= -->
+    <section class="final" id="final">
+      <div class="wrap">
+        <span class="eyebrow reveal" style="justify-content: center"
+          >Last thing</span
+        >
+        <h2 class="reveal d1">Until next time.</h2>
+
+        <div class="final-list reveal d3">
+          <div>Go smash the internship.</div>
+          <div>Make some memories.</div>
+          <div>Learn something impressive.</div>
+          <div>And, preferably, keep in touch.</div>
+        </div>
+
+        <div class="egg-wrap reveal d4">
+          <button class="egg-btn" id="eggBtn">One more thing...</button>
+          <div class="egg-content" id="eggContent">
+            <p>
+              And yes, I did like you. I think it was clear for everyone to see.
+            </p>
+            <p class="small">Now go before this gets embarrassing.</p>
+          </div>
+        </div>
+
+        <div class="final-foot reveal">
+          Yes, I actually made an entire website for you.<br />
+          Don't let it go to your head.
+          <div class="final-sign">— Emmanuel</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="strip"></footer>
+
+    <script>
+      /* ============================================================
+     CONFIG — edit this block to personalise the site further.
+     Nothing below this needs to change.
+     ============================================================ */
+      const CONFIG = {
+        // Photos: save your images in the SAME FOLDER as this HTML file,
+        // named exactly as below (memory-01.jpg, memory-02.jpg, etc).
+        // The moment a file with that name exists next to the site, it
+        // shows up automatically — no code editing needed. If a file is
+        // missing, that card just quietly keeps its placeholder label.
+        // Using a different format (.png, .jpeg, .webp)? Just change the
+        // extension in the "photo" value below to match.
+        memories: [
+          {
+            num: "01",
+            title: "The First Conversation",
+            text: "We'd already had a short conversation, the usual, asking where we were both from.\nThen you walked back over just to say hello again. Somehow you made even that sound sassy.\nI don't know why, but that moment stuck with me.",
+            photo: "memory-01.jpg",
+            photoLabel: "Photo goes here",
+          },
+          {
+            num: "02",
+            title: "Break-Time Adventures",
+            text: "Somehow, Costa and McDonald's became part of the routine.\nJust two people going on completely innocent break-time trips. Obviously.",
+            photo: "memory-02.PNG",
+            photoLabel: "Photo goes here",
+          },
+          {
+            num: "03",
+            title: "The Day I Left You Speechless",
+            text: "You asked me for help.\nI gave you the answer you weren't expecting:\n\u201cYou only wanted my attention.\u201d\nThe silence afterwards was spectacular.",
+            photo: "memory-03.jpg",
+            photoLabel: "Photo goes here",
+          },
+          {
+            num: "04",
+            title: "The Fight",
+            text: "We had our little fight.\nAnd somewhere in the middle of being annoyed with you, I realised something. I actually cared.\nThat was probably when I realised you weren't just a colleague anymore.",
+            photo: "memory-04.jpg",
+            photoLabel: "Photo goes here",
+          },
+          {
+            num: "05",
+            title: "And Then There's Martin",
+            text: "I don't think Martin ever missed an opportunity to make a comment about us.\nHonestly, I'm still not sure whether he was joking\u2026 or just knew something we didn't.",
+            photo: "memory-05.jpg",
+            photoLabel: "Photo goes here",
+          },
+          {
+            num: "06",
+            title: "And Everything In Between",
+            text: "The countless little moments that don't really need their own story.\nThe jokes. The conversations. The looks. The random nonsense.\nSomehow, those might be the things I'll remember most.",
+            photo: "memory-06.jpg",
+            photoLabel: "Photo goes here",
+          },
+        ],
+        rules: [
+          { num: "01", text: "You're not allowed to forget me." },
+          {
+            num: "02",
+            text: "You're also not allowed to replace me with better banter.",
+          },
+          {
+            num: "03",
+            text: "If you come back and act like you don't know me, this entire website will be deleted.",
+          },
+          {
+            num: "04",
+            text: "I may or may not be expecting updates from your internship.",
+          },
+          {
+            num: "05",
+            html: 'Don\u2019t get too comfortable. You still owe me <span class="fill">at least one outing outside of Cencora</span>.',
+          },
+        ],
+      };
+
+      // ---- render memories ----
+      const memoryGrid = document.getElementById("memoryGrid");
+      CONFIG.memories.forEach((m) => {
+        const el = document.createElement("div");
+        el.className = "memory reveal";
+        el.innerHTML = `
+      <div class="memory-photo">
+        <span class="memory-photo-label">${m.photoLabel}</span>
+        <img src="${m.photo}" alt="" loading="lazy" onerror="this.remove()">
+      </div>
+      <div class="memory-body">
+        <div class="memory-num">${m.num}</div>
+        <div class="memory-title">${m.title}</div>
+        <div class="memory-text">${m.text}</div>
+      </div>`;
+        memoryGrid.appendChild(el);
+      });
+
+      // ---- render rules ----
+      const rulesList = document.getElementById("rulesList");
+      CONFIG.rules.forEach((r) => {
+        const el = document.createElement("div");
+        el.className = "rule reveal";
+        el.innerHTML = `
+      <div class="rule-num">${r.num}</div>
+      <div class="rule-text">${r.html ? r.html : r.text}</div>`;
+        rulesList.appendChild(el);
+      });
+
+      // ---- scroll reveal ----
+      const revealEls = document.querySelectorAll(".reveal:not(.in)");
+      const weekEls = document.querySelectorAll(".week");
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18, rootMargin: "0px 0px -6% 0px" },
+      );
+
+      revealEls.forEach((el) => io.observe(el));
+
+      const weekIo = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("in");
+          });
+        },
+        { threshold: 0.5 },
+      );
+      weekEls.forEach((el) => weekIo.observe(el));
+
+      // ---- timeline fill tied to scroll progress through the timeline block ----
+      const timelineFill = document.getElementById("timelineFill");
+      const timelineEl = document.querySelector(".timeline");
+
+      function updateTimelineFill() {
+        const rect = timelineEl.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const total = rect.height;
+        const start = vh * 0.75;
+        let progress = (start - rect.top) / total;
+        progress = Math.max(0, Math.min(1, progress));
+        timelineFill.style.height = progress * 100 + "%";
+      }
+
+      // ---- site-wide scroll progress bar (the timeline thread, extended to the whole page) ----
+      const scrollProgress = document.getElementById("scrollProgress");
+      function updateScrollProgress() {
+        const scrollable =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+        scrollProgress.style.width = pct + "%";
+      }
+
+      function onScroll() {
+        updateTimelineFill();
+        updateScrollProgress();
+      }
+      document.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
+      onScroll();
+
+      // ---- cards: click-to-toggle for touch devices (hover still works via CSS) ----
+      document.querySelectorAll(".card").forEach((card) => {
+        card.addEventListener("click", () => {
+          const isActive = card.classList.contains("active");
+          document
+            .querySelectorAll(".card.active")
+            .forEach((c) => c.classList.remove("active"));
+          if (!isActive) card.classList.add("active");
+        });
+      });
+
+      // ---- easter egg ----
+      const eggBtn = document.getElementById("eggBtn");
+      const eggContent = document.getElementById("eggContent");
+      eggBtn.addEventListener("click", () => {
+        eggBtn.classList.add("opened");
+        const open = eggContent.classList.toggle("open");
+        eggBtn.textContent = open
+          ? "Okay, that's enough."
+          : "One more thing...";
+      });
+    </script>
+  </body>
+</html>
